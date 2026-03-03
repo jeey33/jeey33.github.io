@@ -3,15 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chalet en bois à Soulages-Bonneval - Aveyron</title>
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<title>Chalet en bois - Soulages-Bonneval</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    scroll-behavior: smooth;
+}
+
+nav {
+    background: #2e3d2f;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #a3c293;
 }
 
 header {
@@ -20,115 +37,126 @@ header {
     background-position: center;
     color: white;
     text-align: center;
-    padding: 100px 20px;
-}
-
-header h1 {
-    font-size: 48px;
-    background: rgba(0,0,0,0.5);
-    display: inline-block;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 120px 20px;
 }
 
 section {
-    padding: 40px 20px;
-    max-width: 1100px;
+    padding: 60px 20px;
+    max-width: 1000px;
     margin: auto;
 }
 
-.galerie img {
-    width: 30%;
-    margin: 1%;
+h2 {
+    color: #2e3d2f;
+}
+
+/* Galerie */
+.slideshow {
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+}
+
+.slideshow img {
+    width: 100%;
     border-radius: 10px;
+    display: none;
 }
 
-#calendar {
-    max-width: 900px;
-    margin: 40px auto;
+.slideshow img.active {
+    display: block;
 }
 
+/* Formulaire */
 form {
     display: flex;
     flex-direction: column;
     max-width: 400px;
-    margin: auto;
 }
 
-form input, form button {
+form input, form textarea, form button {
     margin: 10px 0;
     padding: 10px;
-    font-size: 16px;
 }
 
 button {
-    background-color: #5c8a3e;
+    background: #5c8a3e;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #4a6f30;
+    background: #4a6f30;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>Chalet en Bois à Soulages-Bonneval (Aveyron)</h1>
-<p>Nature, calme et authenticité</p>
+<nav>
+<a href="#accueil">Accueil</a>
+<a href="#descriptif">Descriptif</a>
+<a href="#photos">Photos</a>
+<a href="#alentours">Alentours</a>
+<a href="#reservation">Disponibilités</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<header id="accueil">
+<h1>Chalet en Bois à Soulages-Bonneval</h1>
+<p>Nature, calme et authenticité en Aveyron</p>
 </header>
 
-<section>
-<h2>🌿 Le Chalet</h2>
-<p>Magnifique chalet en bois situé à Soulages-Bonneval, au cœur de l'Aveyron.
-Capacité : 6 personnes – Terrasse – Vue nature – Parking privé.</p>
+<section id="descriptif">
+<h2>🏡 Descriptif du Chalet</h2>
+<p>Chalet en bois chaleureux situé à Soulages-Bonneval, en Aveyron. 
+Capacité 6 personnes, terrasse panoramique, cuisine équipée, parking privé, vue sur la nature.</p>
 </section>
 
-<section>
-<h2>📸 Galerie Photos</h2>
-<div class="galerie">
-    <img src="images/photo1.jpg">
-    <img src="images/photo2.jpg">
-    <img src="images/photo3.jpg">
+<section id="photos">
+<h2>📸 Photos</h2>
+<div class="slideshow">
+<img src="images/photo1.jpg" class="active">
+<img src="images/photo2.jpg">
+<img src="images/photo3.jpg">
 </div>
 </section>
 
-<section>
-<h2>📅 Disponibilités</h2>
-<div id='calendar'></div>
+<section id="alentours">
+<h2>🌄 Les alentours</h2>
+<p>Randonnées, lac, nature préservée, villages typiques de l’Aveyron.
+Proche d’Espalion et Laguiole.</p>
 </section>
 
-<section>
-<h2>🛎 Réservation</h2>
-<form action="https://checkout.stripe.com/pay" method="POST">
-    <input type="text" name="nom" placeholder="Votre nom" required>
-    <input type="email" name="email" placeholder="Votre email" required>
-    <input type="date" name="arrivee" required>
-    <input type="date" name="depart" required>
-    <button type="submit">Réserver et payer</button>
+<section id="reservation">
+<h2>📅 Disponibilités & Réservation</h2>
+<p>Contactez-nous pour connaître les disponibilités ou réserver votre séjour.</p>
+
+<form>
+<input type="text" placeholder="Nom" required>
+<input type="email" placeholder="Email" required>
+<input type="date" required>
+<input type="date" required>
+<button type="submit">Envoyer la demande</button>
 </form>
 </section>
 
+<section id="contact">
+<h2>📞 Contact</h2>
+<p>Email : votreemail@email.com</p>
+<p>Téléphone : 06 XX XX XX XX</p>
+</section>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'fr',
-        events: [
-            {
-                title: 'Réservé',
-                start: '2026-07-25',
-                end: '2026-07-30',
-                color: 'red'
-            }
-        ]
-    });
-    calendar.render();
-});
+let slideIndex = 0;
+const slides = document.querySelectorAll(".slideshow img");
+
+setInterval(() => {
+    slides[slideIndex].classList.remove("active");
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add("active");
+}, 3000);
 </script>
 
 </body>
