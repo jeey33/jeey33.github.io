@@ -3,92 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chalet en bois - Soulages-Bonneval</title>
+<title>Chalet Premium - Soulages-Bonneval</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    scroll-behavior: smooth;
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Poppins', sans-serif;
+scroll-behavior:smooth;
 }
 
+body {
+background:#f8f8f8;
+color:#333;
+}
+
+/* NAVIGATION */
 nav {
-    background: #2e3d2f;
-    padding: 15px;
-    text-align: center;
-    position: sticky;
-    top: 0;
+position:fixed;
+width:100%;
+top:0;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+padding:20px;
+text-align:center;
+z-index:1000;
 }
 
 nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
+color:white;
+margin:0 20px;
+text-decoration:none;
+font-weight:500;
+transition:0.3s;
 }
 
 nav a:hover {
-    color: #a3c293;
+color:#c7e6b2;
 }
 
-header {
-    background-image: url("images/photo1.jpg");
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    padding: 120px 20px;
+/* HERO */
+.hero {
+height:100vh;
+background:url("images/photo1.jpg") center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+color:white;
+text-align:center;
 }
 
+.hero h1 {
+font-size:60px;
+background:rgba(0,0,0,0.4);
+padding:20px 40px;
+border-radius:12px;
+}
+
+.hero p {
+margin-top:15px;
+font-size:20px;
+}
+
+/* SECTIONS */
 section {
-    padding: 60px 20px;
-    max-width: 1000px;
-    margin: auto;
+padding:100px 10%;
 }
 
 h2 {
-    color: #2e3d2f;
+font-size:32px;
+margin-bottom:30px;
+text-align:center;
 }
 
-/* Galerie */
-.slideshow {
-    max-width: 800px;
-    margin: auto;
-    position: relative;
+/* CARDS */
+.cards {
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+justify-content:center;
 }
 
-.slideshow img {
-    width: 100%;
-    border-radius: 10px;
-    display: none;
+.card {
+background:white;
+border-radius:15px;
+overflow:hidden;
+width:300px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+transition:0.4s;
+cursor:pointer;
 }
 
-.slideshow img.active {
-    display: block;
+.card:hover {
+transform:scale(1.05);
 }
 
-/* Formulaire */
+.card img {
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.card-content {
+padding:20px;
+}
+
+/* GALLERY */
+.gallery {
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.gallery img {
+width:100%;
+border-radius:15px;
+transition:0.4s;
+cursor:pointer;
+}
+
+.gallery img:hover {
+transform:scale(1.08);
+}
+
+/* FORM */
 form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
+max-width:500px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
 }
 
-form input, form textarea, form button {
-    margin: 10px 0;
-    padding: 10px;
+form input, form textarea {
+padding:12px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 button {
-    background: #5c8a3e;
-    color: white;
-    border: none;
-    cursor: pointer;
+padding:15px;
+background:#3d5a40;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
 }
 
 button:hover {
-    background: #4a6f30;
+background:#588157;
 }
+
+/* FOOTER */
+footer {
+background:#222;
+color:white;
+text-align:center;
+padding:30px;
+}
+
 </style>
 </head>
 
@@ -96,68 +175,88 @@ button:hover {
 
 <nav>
 <a href="#accueil">Accueil</a>
-<a href="#descriptif">Descriptif</a>
+<a href="#chalet">Le Chalet</a>
 <a href="#photos">Photos</a>
 <a href="#alentours">Alentours</a>
-<a href="#reservation">Disponibilités</a>
+<a href="#reservation">Réservation</a>
 <a href="#contact">Contact</a>
 </nav>
 
-<header id="accueil">
-<h1>Chalet en Bois à Soulages-Bonneval</h1>
-<p>Nature, calme et authenticité en Aveyron</p>
-</header>
+<div class="hero" id="accueil">
+<h1>Chalet d'Exception</h1>
+<p>Soulages-Bonneval • Aveyron</p>
+</div>
 
-<section id="descriptif">
-<h2>🏡 Descriptif du Chalet</h2>
-<p>Chalet en bois chaleureux situé à Soulages-Bonneval, en Aveyron. 
-Capacité 6 personnes, terrasse panoramique, cuisine équipée, parking privé, vue sur la nature.</p>
+<section id="chalet">
+<h2>Le Chalet</h2>
+<div class="cards">
+<div class="card">
+<img src="images/photo2.jpg">
+<div class="card-content">
+<h3>6 personnes</h3>
+<p>Confort moderne & charme authentique.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="images/photo3.jpg">
+<div class="card-content">
+<h3>Terrasse panoramique</h3>
+<p>Vue imprenable sur la nature.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="images/photo4.jpg">
+<div class="card-content">
+<h3>Calme absolu</h3>
+<p>Idéal pour se ressourcer.</p>
+</div>
+</div>
+</div>
 </section>
 
 <section id="photos">
-<h2>📸 Photos</h2>
-<div class="slideshow">
-<img src="images/photo1.jpg" class="active">
+<h2>Galerie</h2>
+<div class="gallery">
+<img src="images/photo1.jpg">
 <img src="images/photo2.jpg">
 <img src="images/photo3.jpg">
+<img src="images/photo4.jpg">
 </div>
 </section>
 
 <section id="alentours">
-<h2>🌄 Les alentours</h2>
-<p>Randonnées, lac, nature préservée, villages typiques de l’Aveyron.
-Proche d’Espalion et Laguiole.</p>
+<h2>Les alentours</h2>
+<p style="text-align:center;max-width:800px;margin:auto;">
+Randonnées, lac, nature sauvage, villages typiques, gastronomie locale.
+À proximité de Laguiole et des paysages magnifiques de l’Aveyron.
+</p>
 </section>
 
 <section id="reservation">
-<h2>📅 Disponibilités & Réservation</h2>
-<p>Contactez-nous pour connaître les disponibilités ou réserver votre séjour.</p>
-
+<h2>Réserver votre séjour</h2>
 <form>
-<input type="text" placeholder="Nom" required>
+<input type="text" placeholder="Nom complet" required>
 <input type="email" placeholder="Email" required>
 <input type="date" required>
 <input type="date" required>
-<button type="submit">Envoyer la demande</button>
+<textarea placeholder="Message"></textarea>
+<button>Envoyer la demande</button>
 </form>
 </section>
 
 <section id="contact">
-<h2>📞 Contact</h2>
-<p>Email : votreemail@email.com</p>
-<p>Téléphone : 06 XX XX XX XX</p>
+<h2>Contact</h2>
+<p style="text-align:center;">
+Email : contact@votrechalet.fr<br>
+Téléphone : 06 XX XX XX XX
+</p>
 </section>
 
-<script>
-let slideIndex = 0;
-const slides = document.querySelectorAll(".slideshow img");
-
-setInterval(() => {
-    slides[slideIndex].classList.remove("active");
-    slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add("active");
-}, 3000);
-</script>
+<footer>
+© 2026 Chalet Soulages-Bonneval • Tous droits réservés
+</footer>
 
 </body>
 </html>
