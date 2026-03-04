@@ -51,18 +51,20 @@ color:#c7e6b2;
 height:100vh;
 background:url("images/IMG_3979.jpeg") center/cover no-repeat;
 display:flex;
-align-items:center;
+align-items:flex-start;   /* on colle en haut */
 justify-content:center;
 flex-direction:column;
 color:white;
 text-align:center;
+padding-top:180px;        /* espace depuis le haut */
 }
 
 .hero h1 {
 font-size:60px;
-background:rgba(0,0,0,0.4);
+background:rgba(0,0,0,0.5);
 padding:20px 40px;
 border-radius:12px;
+margin:auto;
 }
 
 .hero p {
@@ -171,9 +173,51 @@ text-align:center;
 padding:30px;
 }
 
+.fc {
+margin-top:40px;
+}
+
+.fc-daygrid-day {
+cursor:pointer;
+}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'fr',
+        selectable: true,
+        selectMirror: true,
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: ''
+        },
+        events: [
+            {
+                start: '2026-07-10',
+                end: '2026-07-15',
+                display: 'background',
+                color: '#ff6b6b'
+            }
+        ],
+        select: function(info) {
+            document.getElementById('dateSelection').value =
+                info.startStr + " au " + info.endStr;
+        },
+        dayCellDidMount: function(info) {
+            if (!info.el.classList.contains("fc-day-past")) {
+                info.el.style.backgroundColor = "#d4f8d4"; 
+            }
+        }
+    });
+
+    calendar.render();
+});
+</script>
 </head>
 
 <body>
