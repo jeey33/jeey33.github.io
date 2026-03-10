@@ -40,7 +40,7 @@
         section { padding:60px 10%; }
         h2 { font-size:32px; margin-bottom:30px; text-align:center; color: #3d5a40; }
 
-        /* CARDS LE CHALET */
+        /* CARDS LE CHALET (4 cartes) */
         .cards-chalet {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -54,43 +54,59 @@
         .card-chalet img { width:100%; height:200px; object-fit:cover; cursor: zoom-in; }
         .card-content { padding:20px; text-align: center; }
 
-        /* GALLERY */
+        /* GALLERY (Défilement horizontal) */
         .gallery { display:flex; overflow-x:auto; gap:20px; scroll-snap-type:x mandatory; padding-bottom:20px; }
         .gallery img { height:280px; flex-shrink:0; border-radius:15px; scroll-snap-align:center; cursor: zoom-in; transition: 0.3s; }
+        .gallery img:hover { transform: scale(1.03); }
 
-        /* LIGHTBOX */
+        /* LIGHTBOX (Adaptation parfaite à l'écran) */
         .lightbox {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0; 
             width: 100%; height: 100%; background: rgba(0,0,0,0.9);
             justify-content: center; align-items: center;
         }
-        .lightbox-content { position: relative; max-width: 90%; max-height: 90%; text-align: center; }
-        .lightbox img { max-width: 100%; max-height: 100%; border-radius: 5px; }
-        .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); color: white; border: none; padding: 15px; font-size: 24px; border-radius: 50%; cursor: pointer; }
-        .lb-prev { left: -60px; }
-        .lb-next { right: -60px; }
-        .close-lightbox { position: absolute; top: -40px; right: 0; color: white; font-size: 30px; cursor: pointer; }
+        .lightbox-content {
+            position: relative;
+            max-width: 100%; /* S'adapte à la largeur max */
+            max-height: 100%; /* S'adapte à la hauteur max */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Marges de sécurité */
+        }
+        .lightbox img {
+            max-width: 100%; /* Ne dépasse jamais la largeur de lightbox-content */
+            max-height: 100%; /* Ne dépasse jamais la hauteur de lightbox-content */
+            width: auto; height: auto; /* Maintient le ratio */
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        .close-lightbox { position: absolute; top: -30px; right: 20px; color: white; font-size: 35px; cursor: pointer; z-index: 10; }
+        
+        /* Boutons de navigation */
+        .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); color: white; border: none; padding: 15px 20px; font-size: 20px; border-radius: 50%; cursor: pointer; transition: 0.3s; z-index: 10; }
+        .lb-prev { left: 10px; }
+        .lb-next { right: 10px; }
 
-        /* ALENTOURS */
+        /* ALENTOURS (5 items) */
         .alents { padding: 60px 20px; background: #f1f1f1; text-align: center; }
         .cards-alents { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 30px; }
         .card-alent { background: white; padding: 25px; border-radius: 15px; text-decoration: none; color: #333; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card-alent:hover { background: #f9fff4; }
+        .card-alent:hover { transform: translateY(-5px); background: #f9fff4; }
 
         /* CALENDRIER RÉDUIT */
         .calendar-container { max-width: 700px; margin: 0 auto 40px auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .fc { font-size: 0.9em; }
 
         /* FORM */
         form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; }
         form input, form textarea { padding:12px; border-radius:8px; border:1px solid #ccc; }
-        button { padding:15px; background:#3d5a40; color:white; border:none; border-radius:8px; cursor:pointer; font-weight: bold; }
+        button { padding:15px; background:#3d5a40; color:white; border:none; border-radius:8px; cursor:pointer; font-weight: bold; transition: 0.3s; }
 
         /* MAP */
         .map-container { width: 100%; height: 450px; border-top: 5px solid #3d5a40; margin-top: 40px; }
 
-        footer { background:#222; color:white; text-align:center; padding:30px; }
-
-        @media (max-width: 768px) { .lb-nav { display: none; } }
+        footer { background:#222; color:white; text-align:center; padding:30px; margin-top: 0; }
     </style>
 </head>
 
@@ -113,22 +129,10 @@
 <section id="chalet">
     <h2>Le Chalet</h2>
     <div class="cards-chalet">
-        <div class="card-chalet">
-            <img src="images/IMG_3978.jpeg" onclick="zoomChalet(this.src)" alt="Extérieur">
-            <div class="card-content"><h3>L'extérieur</h3><p>Jardin et grande terrasse plein sud.</p></div>
-        </div>
-        <div class="card-chalet">
-            <img src="images/IMG_3985.jpeg" onclick="zoomChalet(this.src)" alt="Chambres">
-            <div class="card-content"><h3>Les chambres</h3><p>Chambre parentale et grand dortoir à l'étage.</p></div>
-        </div>
-        <div class="card-chalet">
-            <img src="images/IMG_8771.JPG" onclick="zoomChalet(this.src)" alt="Cuisine">
-            <div class="card-content"><h3>Cuisine</h3><p>Entièrement équipée pour 10 personnes.</p></div>
-        </div>
-        <div class="card-chalet">
-            <img src="images/IMG_3974.jpeg" onclick="zoomChalet(this.src)" alt="Salon">
-            <div class="card-content"><h3>Séjour</h3><p>Espace de vie ouvert et chaleureux.</p></div>
-        </div>
+        <div class="card-chalet"><img src="images/IMG_3978.jpeg" onclick="zoomChalet(this.src)"><div class="card-content"><h3>L'extérieur.</h3><p>Jardin et grande terrasse donnant sur la nature.</p></div></div>
+        <div class="card-chalet"><img src="images/IMG_3985.jpeg" onclick="zoomChalet(this.src)"><div class="card-content"><h3>Les chambres.</h3><p>Une chambre parentale RDC et un grand dortoir à l'étage.</p></div></div>
+        <div class="card-chalet"><img src="images/IMG_8771.JPG" onclick="zoomChalet(this.src)"><div class="card-content"><h3>Cuisine.</h3><p>Une grande cuisine ouverte équipée.</p></div></div>
+        <div class="card-chalet"><img src="images/IMG_3974.jpeg" onclick="zoomChalet(this.src)"><div class="card-content"><h3>Nature.</h3><p>Un espace de vie ouvert sur la nature.</p></div></div>
     </div>
 </section>
 
@@ -142,43 +146,44 @@
 </section>
 
 <section id="alentours" class="alents">
-    <h2>Les Alentours</h2>
+    <h2>Découvrez les alentours</h2>
     <div class="cards-alents">
-        <a href="https://www.laguiole.fr" target="_blank" class="card-alent"><h3>🔪 Forge Laguiole</h3></a>
-        <a href="https://www.bras.fr" target="_blank" class="card-alent"><h3>🍽 Restaurant Bras</h3></a>
-        <a href="https://www.golf-mezeyrac.fr" target="_blank" class="card-alent"><h3>⛳ Golf Mezeyrac</h3></a>
-        <a href="https://www.laguiole-ski.com" target="_blank" class="card-alent"><h3>🎿 Ski Laguiole</h3></a>
-        <a href="https://www.tourisme-aveyron.com" target="_blank" class="card-alent"><h3>🥾 Randonnées</h3></a>
+        <a href="https://www.laguiole.fr" target="_blank" class="card-alent"><h3>🔪 Forge Laguiole</h3><p>Tradition coutelière emblématique.</p></a>
+        <a href="https://www.bras.fr" target="_blank" class="card-alent"><h3>🍽 Restaurant Bras</h3><p>Gastronomie étoilée Bras.</p></a>
+        <a href="https://www.golf-mezeyrac.fr" target="_blank" class="card-alent"><h3>⛳ Golf de Mezeyrac</h3><p>Un parcours exceptionnel au calme.</p></a>
+        <a href="https://www.laguiole-ski.com" target="_blank" class="card-alent"><h3>🎿 Ski Laguiole</h3><p>Sports d’hiver.</p></a>
+        <a href="https://www.tourisme-aveyron.com" target="_blank" class="card-alent"><h3>🥾 Randonnées Aubrac</h3><p>Sentiers sauvages.</p></a>
     </div>
 </section>
 
 <section id="reservation">
-    <h2>Réservation</h2>
+    <h2>Disponibilités</h2>
     <div class="calendar-container"><div id="calendar"></div></div>
-    <form id="resForm">
+    <form>
         <input type="text" placeholder="Nom" required>
         <input type="email" placeholder="Email" required>
         <input type="text" id="datePicker" placeholder="Dates souhaitées" required>
         <div id="priceDisplay" style="text-align:center; font-weight:bold;"></div>
+        <textarea placeholder="Votre message..."></textarea>
         <button type="submit">Envoyer la demande</button>
     </form>
 </section>
 
 <section id="contact">
     <h2>Contact</h2>
-    <p style="text-align:center;">Email : lacabaneantonin@gmail.com<br>Tel : 06 82 49 22 11</p>
+    <p style="text-align:center;">Email : lacabaneantonin@gmail.com<br>Tel : 06 82 49 22 11<br>Adresse : 12 Rte de Laguiole, Soulages-Bonneval</p>
 </section>
 
 <div id="localisation" class="map-container">
-    <iframe src="maps.google.com/4" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="http://googleusercontent.com/maps.google.com/7" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </div>
 
 <div id="lightbox" class="lightbox">
+    <span class="close-lightbox" id="closeLb">&times;</span>
     <div class="lightbox-content">
-        <span class="close-lightbox" onclick="hideLightbox()">×</span>
         <img id="lb-img" src="">
-        <button class="lb-nav lb-prev" id="prevBtn" onclick="moveGallery(-1)">❮</button>
-        <button class="lb-nav lb-next" id="nextBtn" onclick="moveGallery(1)">❯</button>
+        <button class="lb-nav lb-prev" id="prevBtn" style="display:none;">&#10094;</button>
+        <button class="lb-nav lb-next" id="nextBtn" style="display:none;">&#10095;</button>
     </div>
 </div>
 
@@ -189,38 +194,57 @@
 <script>
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-img');
+    const closeLb = document.getElementById('closeLb');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     const galleryImgs = Array.from(document.querySelectorAll('#mainGallery img'));
     let currentIndex = 0;
 
+    // --- LIGHTBOX GESTION ---
+    function hideLightbox() { lightbox.style.display = 'none'; }
+    closeLb.onclick = hideLightbox;
+    lightbox.onclick = (e) => { if (e.target === lightbox || e.target === document.querySelector('.lightbox-content')) hideLightbox(); };
+
+    // ZOOM CARTES CHALET (Image seule)
     function zoomChalet(src) { 
         lbImg.src = src; lightbox.style.display = 'flex'; 
-        document.getElementById('prevBtn').style.display = 'none';
-        document.getElementById('nextBtn').style.display = 'none';
+        prevBtn.style.display = 'none'; nextBtn.style.display = 'none';
     }
 
-    function hideLightbox() { lightbox.style.display = 'none'; }
-
-    galleryImgs.forEach((img, index) => {
-        img.onclick = () => {
-            currentIndex = index; lbImg.src = img.src;
-            lightbox.style.display = 'flex';
-            document.getElementById('prevBtn').style.display = 'block';
-            document.getElementById('nextBtn').style.display = 'block';
-        };
-    });
-
-    function moveGallery(step) {
-        currentIndex = (currentIndex + step + galleryImgs.length) % galleryImgs.length;
+    // ZOOM GALERIE (Avec navigation)
+    function updateGalleryImg(index) {
+        currentIndex = (index + galleryImgs.length) % galleryImgs.length;
         lbImg.src = galleryImgs[currentIndex].src;
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    galleryImgs.forEach((img, index) => {
+        img.onclick = () => {
+            lightbox.style.display = 'flex';
+            updateGalleryImg(index);
+            prevBtn.style.display = 'block'; nextBtn.style.display = 'block';
+        };
+    });
+
+    prevBtn.onclick = (e) => { e.stopPropagation(); updateGalleryImg(currentIndex - 1); };
+    nextBtn.onclick = (e) => { e.stopPropagation(); updateGalleryImg(currentIndex + 1); };
+
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === "Escape") hideLightbox();
+            if (prevBtn.style.display === 'block') {
+                if (e.key === "ArrowLeft") updateGalleryImg(currentIndex - 1);
+                if (e.key === "ArrowRight") updateGalleryImg(currentIndex + 1);
+            }
+        }
+    });
+
+    // --- CALENDRIER & PRIX ---
+    document.addEventListener('DOMContentLoaded', () => {
         new FullCalendar.Calendar(document.getElementById('calendar'), {
             initialView: 'dayGridMonth', locale: 'fr', contentHeight: 'auto',
             headerToolbar: { left: 'prev,next', center: 'title', right: '' },
             dayCellDidMount: (info) => { if (!info.el.classList.contains("fc-day-past")) info.el.style.backgroundColor = "#d4f8d4"; }
         }).render();
-
         flatpickr("#datePicker", {
             mode: "range", dateFormat: "Y-m-d",
             onChange: (dates) => {
