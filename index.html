@@ -326,39 +326,53 @@ Randonnées pédestres à 300m, pêche dans la Selve à 100m, à 5 min du golf d
 </div>
 </section>
 <section id="reservation">
-    <h2>Demande de Réservation</h2>
-    
-    <p>Tarifs</p>
-        <p>Semaine de 550€ à 780€</p>
-        <p>Week-end de 280€ à 380€</p>
-        
-            <p><strong>Services supplémentaires</strong></p>
-                <p>Dépôt de garantie: 500€ à l'arrivée</p>
-                <p>Ménage fin de séjour: 75€</p>
-                <p>Draps et linges de toilette: 10€/jour/personne</p>
-                <p>Chauffage hiver: 20€/jour</p>
-                        
-    
-    <div class="calendar-container"><div id="calendar"></div></div>
-    
-  <form action="https://formspree.io/f/mkoqjzek" method="POST">
+<h2>Disponibilités & Réservation</h2>
+
+<div style="max-width:800px;margin:auto;text-align:center;line-height:1.8">
+
+<h3>Tarifs</h3>
+<p>Semaine : <strong>550€ à 780€</strong></p>
+<p>Week-end : <strong>280€ à 380€</strong></p>
+
+<h3 style="margin-top:25px">Services supplémentaires</h3>
+
+<p>Dépôt de garantie : 500€ à l'arrivée</p>
+<p>Ménage fin de séjour : 75€</p>
+<p>Draps : 10€</p>
+<p>Linge de bain : 8€</p>
+<p>Chauffage hiver : 20€/jour</p>
+
+</div>
+
+<div class="calendar-container">
+<div id="calendar"></div>
+</div>
+<p style="text-align:center;margin-bottom:20px;font-style:italic">
+Remplissez ce formulaire pour vérifier la disponibilité et recevoir une confirmation rapide.
+</p>
+<form action="https://formspree.io/f/mkoqjzek" method="POST">
 
 <input type="hidden" name="_subject" value="Nouvelle demande de réservation - Cabane Antonin">
 <input type="hidden" name="_captcha" value="false">
 
 <input type="text" name="Nom" placeholder="Nom complet" required>
+
 <input type="email" name="Email" placeholder="Email" required>
+
 <input type="text" id="datePicker" name="Dates" placeholder="Sélectionnez vos dates" required>
 
 <input type="hidden" name="Prix_Estime" id="hiddenPrice">
 
-<div id="priceDisplay"></div>
+<div id="priceDisplay" style="font-weight:bold;color:#3d5a40;text-align:center"></div>
 
 <textarea name="Message" placeholder="Votre message..."></textarea>
+
+<input type="hidden" name="_replyto" value="contact@lacabaneantonin.fr">
 
 <button type="submit">Envoyer la demande</button>
 
 </form>
+
 </section>
 
 <section id="contact">
