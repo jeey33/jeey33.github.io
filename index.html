@@ -188,28 +188,34 @@
 <section id="reservation">
     <h2>Disponibilités & Réservation</h2>
     <div class="calendar-container"><div id="calendar"></div></div>
-    <form id="resForm">
-        <input type="text" placeholder="Nom complet" required>
-        <input type="email" placeholder="Email" required>
-        <input type="text" id="datePicker" placeholder="Sélectionnez vos dates" required>
+    
+    <form action="https://formspree.io/f/mkoqjzek" method="POST">
+        <input type="text" name="Nom" placeholder="Nom complet" required>
+        <input type="email" name="Email" placeholder="Email" required>
+        <input type="text" id="datePicker" name="Dates" placeholder="Sélectionnez vos dates" required>
+        
+        <input type="hidden" name="Prix_Estime" id="hiddenPrice">
+        
         <div id="priceDisplay" style="text-align:center; font-weight:bold; color: #3d5a40; margin-bottom:10px;"></div>
-        <textarea placeholder="Votre message..."></textarea>
+        <textarea name="Message" placeholder="Votre message..."></textarea>
+        
+        <input type="hidden" name="_next" value="https://lacabaneantonin.fr">
+        
         <button type="submit">Envoyer la demande</button>
     </form>
-    <div id="thankYouMessage"><h3>Merci !</h3><p>Votre demande a bien été envoyée.</p></div>
 </section>
 
 <section id="contact">
     <h2>Contact</h2>
     <p style="text-align:center; font-size: 1.1rem; line-height: 2;">
-        Email : <strong>lacabaneantonin@gmail.com</strong><br>
+        Email : <strong>contact@lacabaneantonin.fr</strong><br>
         Téléphone : <strong>06 82 49 22 11</strong><br>
         Adresse : 12 Rte de Laguiole, 12210 Soulages-Bonneval
     </p>
 </section>
 
 <div id="localisation" class="map-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.4251147041!2d2.7958583!3d44.6755695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b2ba028688435d%3A0xc6659695d3a58843!2s12%20Rte%20de%20Laguiole%2C%2012210%20Soulages-Bonneval!5e0!3m2!1sfr!2sfr!4v1700000000000" 
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2836.541334651034!2d2.795472076612173!3d44.67576517107172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b2e9e6230f65df%3A0x6a053229b9e6f0b!2s12%20Rte%20de%20Laguiole%2C%2012210%20Soulages-Bonneval!5e0!3m2!1sfr!2sfr!4v1709654000000!5m2!1sfr!2sfr" 
     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </div>
 
@@ -266,19 +272,16 @@
         }).render();
 
         flatpickr("#datePicker", {
-            mode: "range", dateFormat: "Y-m-d",
+            mode: "range", dateFormat: "d-m-Y",
             onChange: (dates) => {
                 if (dates.length === 2) {
                     const days = Math.ceil(Math.abs(dates[1] - dates[0]) / 86400000);
-                    document.getElementById("priceDisplay").innerHTML = "Total : " + (days * 120) + " € (" + days + " nuits)";
+                    const totalText = "Total : " + (days * 120) + " € (" + days + " nuits)";
+                    document.getElementById("priceDisplay").innerHTML = totalText;
+                    document.getElementById("hiddenPrice").value = totalText;
                 }
             }
         });
-
-        document.getElementById('resForm').onsubmit = function(e) {
-            e.preventDefault(); this.style.display = 'none';
-            document.getElementById('thankYouMessage').style.display = 'block';
-        };
     });
 </script>
 </body>
