@@ -13,28 +13,50 @@
         * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; scroll-behavior:smooth; }
         body { background:#f8f8f8; color:#333; }
 
-        /* NAVIGATION */
-        nav {
-            position:fixed; width:100%; top:0;
-            background:rgba(0,0,0,0.7); backdrop-filter:blur(10px);
-            padding:15px; text-align:center; z-index:1000;
+       nav {
+            position: fixed; width: 100%; top: 0;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+            padding: 15px 20px; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        nav a { color:white; margin:0 15px; text-decoration:none; font-weight:500; transition:0.3s; font-size: 0.9rem; }
-        nav a:hover { color:#c7e6b2; }
+        .nav-logo { color: white; font-weight: 600; text-decoration: none; font-size: 1.1rem; }
+        
+        .nav-links { display: flex; }
+        .nav-links a { color: white; margin-left: 20px; text-decoration: none; font-weight: 400; transition: 0.3s; font-size: 0.9rem; }
+        .nav-links a:hover { color: #c7e6b2; }
 
-        /* HERO - Image entière et titre dans le ciel */
-        .hero {
-            height:100vh;
-            background:url("images/IMG_3979.jpeg") center/contain no-repeat;
-            background-color: #2c2c2c;
-            display:flex;
-            align-items: flex-start; 
-            justify-content:center;
-            color:white;
-            text-align:center;
-            padding-top:100px; 
+        /* Menu Burger pour Mobile */
+        .menu-toggle { display: none; color: white; font-size: 24px; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none; flex-direction: column; position: absolute;
+                top: 60px; left: 0; width: 100%; background: rgba(0,0,0,0.95);
+                padding: 20px; text-align: center; border-bottom: 3px solid #3d5a40;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 15px 0; font-size: 1.2rem; }
         }
-        .hero h1 { font-size:45px; background:rgba(0,0,0,0.5); padding:15px 30px; border-radius:12px; }
+       /* HERO - Ajustement du texte pour libérer l'image */
+        .hero {
+            height: 100vh;
+            background: url("images/IMG_3979.jpeg") center/contain no-repeat;
+            background-color: #2c2c2c;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Descend le contenu en bas */
+            color: white;
+            text-align: center;
+            padding-bottom: 80px; /* Espace par rapport au bas de l'image */
+        }
+        .hero-text-container {
+            background: rgba(0,0,0,0.4); /* Voile léger pour la lisibilité */
+            backdrop-filter: blur(4px);
+            padding: 20px;
+            width: 100%;
+        }
+        .hero h1 { font-size: 35px; margin-bottom: 5px; background: none; } /* On retire le fond noir opaque ici */
 
         /* BOUTON APPELER MOBILE */
         .btn-call-mobile {
@@ -120,23 +142,28 @@
 <body>
 
 <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#chalet">Le Chalet</a>
-    <a href="#photos">Photos</a>
-    <a href="#alentours">Alentours</a>
-    <a href="#reservation">Réservation</a>
-    <a href="#contact">Contact</a>
-    <a href="#localisation">S'y rendre</a>
+    <a href="#accueil" class="nav-logo">La Cabane Antonin</a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="nav-links" id="navLinks">
+        <a href="#accueil" onclick="toggleMenu()">Accueil</a>
+        <a href="#chalet" onclick="toggleMenu()">Le Chalet</a>
+        <a href="#photos" onclick="toggleMenu()">Photos</a>
+        <a href="#alentours" onclick="toggleMenu()">Alentours</a>
+        <a href="#reservation" onclick="toggleMenu()">Réservation</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
+        <a href="#localisation" onclick="toggleMenu()">S'y rendre</a>
+    </div>
 </nav>
 
 <a href="tel:0682492211" class="btn-call-mobile">📞 Appeler Antonin</a>
 
 <div class="hero" id="accueil">
-  <h1>La Cabane Antonin<br>
-<span style="font-size:20px;font-weight:300">
-Chalet en bois sur l'Aubrac • Gîtes • Soulages-Bonneval • Laguiole
-</span>
-</h1>
+    <div class="hero-text-container">
+        <h1>La Cabane Antonin</h1>
+        <p style="font-size:18px; font-weight:300;">
+            Chalet en bois sur l'Aubrac • Gîtes • Soulages-Bonneval • Laguiole
+        </p>
+    </div>
 </div>
 
 <section id="chalet">
@@ -452,6 +479,10 @@ Remplissez ce formulaire pour vérifier la disponibilité et recevoir une confir
             }
         });
     });
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    }
 </script>
 </body>
 </html>
