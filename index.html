@@ -38,25 +38,48 @@
             .nav-links.active { display: flex; }
             .nav-links a { margin: 15px 0; font-size: 1.2rem; }
         }
-       /* HERO - Ajustement du texte pour libérer l'image */
+      /* HERO - Structure éclatée */
         .hero {
             height: 100vh;
             background: url("images/IMG_3979.jpeg") center/contain no-repeat;
             background-color: #2c2c2c;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Descend le contenu en bas */
+            justify-content: space-between; /* Pousse le contenu aux deux extrémités */
             color: white;
             text-align: center;
-            padding-bottom: 80px; /* Espace par rapport au bas de l'image */
+            padding: 100px 0 40px 0; /* Espace en haut pour le nav et en bas */
         }
-        .hero-text-container {
-            background: rgba(0,0,0,0.4); /* Voile léger pour la lisibilité */
-            backdrop-filter: blur(4px);
+
+        .hero-top h1 { 
+            font-size: 45px; 
+            background: rgba(0,0,0,0.5); 
+            display: inline-block; 
+            padding: 15px 30px; 
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .hero-bottom {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
             padding: 20px;
             width: 100%;
         }
-        .hero h1 { font-size: 35px; margin-bottom: 5px; background: none; } /* On retire le fond noir opaque ici */
+
+        .hero-bottom p {
+            font-size: 20px;
+            font-weight: 300;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        /* Correction pour mobile pour éviter que l'image soit trop petite */
+        @media (max-width: 768px) {
+            .hero { background-size: cover; } /* "Cover" remplit mieux l'écran du téléphone */
+            .hero-top h1 { font-size: 30px; }
+            .hero-bottom p { font-size: 16px; }
+        }
 
         /* BOUTON APPELER MOBILE */
         .btn-call-mobile {
@@ -158,11 +181,12 @@
 <a href="tel:0682492211" class="btn-call-mobile">📞 Appeler Antonin</a>
 
 <div class="hero" id="accueil">
-    <div class="hero-text-container">
+    <div class="hero-top">
         <h1>La Cabane Antonin</h1>
-        <p style="font-size:18px; font-weight:300;">
-            Chalet en bois sur l'Aubrac • Gîtes • Soulages-Bonneval • Laguiole
-        </p>
+    </div>
+
+    <div class="hero-bottom">
+        <p>Chalet en bois sur l'Aubrac • Gîtes • Soulages-Bonneval • Laguiole</p>
     </div>
 </div>
 
