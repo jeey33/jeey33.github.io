@@ -152,6 +152,22 @@
             .lb-prev { left: 0px; } .lb-next { right: 0px; }
             .close-lightbox { top: -40px; right: 10px; }
         }
+
+        /* Empêche le balancement horizontal */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Correction pour les images et iframes */
+img, iframe {
+    max-width: 100%;
+}
+
+/* Ajustement du padding des sections sur mobile */
+@media (max-width: 768px) {
+    section { padding: 40px 5%; }
+}
     </style>
 </head>
 
@@ -542,37 +558,5 @@ updateAntoninTip();
         navLinks.classList.toggle('active');
     }
 </script>
-
-async function updateAntoninTip() {
-    const city = "Soulages-Bonneval";
-    const apiKey = "8c63a0cab4b31752793a8783774a11b0"; // Il faudra en générer une gratuitement
-    const tipElement = document.getElementById('weatherTip');
-
-    try {
-        // Simulation ou Appel API (Exemple logique)
-        // Ici, on définit des conseils selon les conditions
-        const weatherContext = {
-            "Clear": "☀️ <strong>Le conseil d'Antonin :</strong> Le ciel est pur ! C'est le moment parfait pour une rando vers la cascade de Déroc.",
-            "Clouds": "☁️ <strong>Le conseil d'Antonin :</strong> Un peu couvert, mais idéal pour aller chercher du fromage à la coopérative Jeune Montagne !",
-            "Rain": "🌧️ <strong>Le conseil d'Antonin :</strong> Il pleut ? Rien de tel qu'un bon Aligot au coin du feu dans le chalet.",
-            "Snow": "❄️ <strong>Le conseil d'Antonin :</strong> La neige arrive ! Sortez les raquettes pour une balade magique sur le plateau.",
-            "Default": "🌲 <strong>Le conseil d'Antonin :</strong> Profitez du grand air de l'Aubrac et du calme du chalet !"
-        };
-
-        // On récupère la météo réelle (Exemple simplifié)
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=fr&appid=${apiKey}`);
-        const data = await response.json();
-        const mainWeather = data.weather[0].main;
-
-        tipElement.innerHTML = weatherContext[mainWeather] || weatherContext["Default"];
-        
-    } catch (error) {
-        // Si l'API échoue, on met un message générique sympa
-        tipElement.innerHTML = "🌲 <strong>Le conseil d'Antonin :</strong> Quel que soit le temps, l'Aubrac reste magnifique. Profitez de la vue !";
-    }
-}
-
-// Lancer la mise à jour au chargement
-updateAntoninTip();
 </body>
 </html>
