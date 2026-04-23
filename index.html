@@ -504,7 +504,7 @@ Remplissez ce formulaire pour vérifier la disponibilité et recevoir une confir
             onChange: (dates) => {
                 if (dates.length === 2) {
                     const days = Math.ceil(Math.abs(dates[1] - dates[0]) / 86400000);
-                    const totalText = "Total : " + (days * 120) + " € (" + days + " nuits)";
+                    const totalText = "Total : " + (à voir suivant période) + " € (" + days + " nuits)";
                     document.getElementById("priceDisplay").innerHTML = totalText;
                     document.getElementById("hiddenPrice").value = totalText;
                 }
