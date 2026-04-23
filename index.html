@@ -421,7 +421,9 @@ Remplissez ce formulaire pour vérifier la disponibilité et recevoir une confir
 
 <input type="hidden" name="Prix_Estime" id="hiddenPrice">
 
-<div id="priceDisplay" style="font-weight:bold;color:#3d5a40;text-align:center"></div>
+<div id="priceDisplay" style="margin: 15px 0; font-size: 0.9rem; text-align: center; font-style: italic;">
+    Sélectionnez vos dates pour estimer votre séjour.
+</div>
 
 <textarea name="Message" placeholder="Votre message..."></textarea>
 
@@ -500,16 +502,25 @@ Remplissez ce formulaire pour vérifier la disponibilité et recevoir une confir
         }).render();
 
         flatpickr("#datePicker", {
-            mode: "range", dateFormat: "d-m-Y",
-            onChange: (dates) => {
-                if (dates.length === 2) {
-                    const days = Math.ceil(Math.abs(dates[1] - dates[0]) / 86400000);
-                    const totalText = "Total : " + (à voir suivant période) + " € (" + days + " nuits)";
-                    document.getElementById("priceDisplay").innerHTML = totalText;
-                    document.getElementById("hiddenPrice").value = totalText;
-                }
-            }
-        });
+    mode: "range",
+    dateFormat: "d-m-Y",
+    minDate: "today", // On ne réserve pas dans le passé
+    locale: "fr",     // Pour avoir les jours en français
+    onChange: (dates) => {
+        if (dates.length === 2) {
+            const dateDebut = dates[0].toLocaleDateString('fr-FR');
+            const dateFin = dates[1].toLocaleDateString('fr-FR');
+            const nuits = Math.ceil((dates[1] - dates[0]) / 86400000);
+            
+            // On informe l'utilisateur que le calcul arrive après
+            document.getElementById("priceDisplay").innerHTML = 
+                `Séjour du ${dateDebut} au ${dateFin} (${nuits} nuits). <br> <span style="color:#e67e22;">Antonin calculera votre tarif personnalisé.</span>`;
+            
+            // On remplit le champ caché pour que vous receviez l'info par mail
+            document.getElementById("hiddenPrice").value = `Demande pour ${nuits} nuits (du ${dateDebut} au ${dateFin})`;
+        }
+    }
+});
     });
 
     async function updateAntoninTip() {
